@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>My Products</h1>
+ <div class="float-right">
+         <p style="padding-right: 100px"><a href="{% url 'RentalApp:add_product' %}" role="button" class="btn btn-info" id="addBtn">Add Product</a></p>
+ </div>
+<div id="home-row" class="row">
+    {%if items is Null%}
+        <h2>No Products</h2>
+    {%else%}
+    {% for item in items %}
+    <div id="home-column" class="column">
+    <div class="content1">
+        <a href="{% url 'RentalApp:product_details' item.pk %}">
+          <a href="{% url 'RentalApp:product_details' item.pk %}">
+              <img class="img1" src="{% if item.itemImage %}{{ item.itemImage.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}">
+          </a>
+        </a>
+        <div class="info">
+          <a href="{% url 'RentalApp:product_details' item.pk%}" class="title">
+            {{ item.itemName }}
+          </a>
+            <br>
+            ${{ item.costPerItem }}
+        </div>
+      </div>
+    </div>
+     {% endfor %}
+    {%endif%}
+  </div>
+{% endblock %}

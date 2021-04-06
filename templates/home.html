@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>Products</h1>
+<div class="padding">
+            <form method="get">
+                {{filter.form|crispy}} <input type="submit" value="Search" class="btn btn-info"/>
+            </form>
+    </div>
+
+<div id="home-row" class="row">
+    {% for item in items %}
+  <div id="home-column" class="column">
+    <div class="content1">
+        <a href="{{ item.get_absolute_url }}">
+          <a href="{{ item.get_absolute_url }}">
+              <img class="img1" src="{% if item.itemImage %}{{ item.itemImage.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}">
+          </a>
+        </a>
+        <div class="info">
+          <a href="{{ item.get_absolute_url }}" class="title">
+            {{ item.itemName }}
+          </a>
+            <br>
+            {{ item.costPerItem }} {{ currency }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+{% block title %}Log In{% endblock title %}
+
+{% block content %}
+ <div id="login">
+        <h3 class="text-center pt-5">Login form</h3>
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form method="post" id="login-form" class="form">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <button class="btn btn-success ml-2" type="submit">Log In</button>
+                            <a href="{% url 'RentalApp:password_reset' %}" class="btn btn-secondary ml-2">
+                                Forgot Password</a>
+                            <a href="{% provider_login_url 'google' %}" class="btn btn-secondary ml-2">
+                                Login with Google</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+ </div>
+{% endblock content %}

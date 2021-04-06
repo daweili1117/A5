@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  {{ product.name }}
+{% endblock %}
+{% block content %}
+ <div class="container1">
+
+  <!-- Left Column / Headphones Image -->
+
+
+  <!-- Right Column -->
+  <div class="left-column">
+    <img src="{% if item.itemImage %}{{ item.itemImage.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}" alt="">
+  </div>
+
+  <div class="right-column">
+
+    <!-- Product Description -->
+    <div class="product-description">
+      <span>{{ item.category }}</span>
+      <h1>{{ item.itemName }}</h1>
+      <p>{{ item.itemDescription|linebreaks }}</p>
+         <p>{{item.itemOwner}} {% if not item.itemOwner.phone_number is None%} {{item.itemOwner.phone_number}}</p> {%endif%}
+        {%if not item.itemOwner.address %}
+        <p>No address</p>
+        {%else%}
+            <p><h5>Address </h5></p>
+            <address> {{item.itemOwner.address.address1}} {{item.itemOwner.address.address2}} <br>
+            {{item.itemOwner.address.city}}, {{item.itemOwner.address.state}}-{{item.itemOwner.address.zip_code}}<br>
+            {{item.itemOwner.address.country}}<br>
+            </address>
+        {%endif%}
+    </div>
+
+    <!-- Product Pricing -->
+    <div class="product-price">
+      <span>Rent: {{ item.costPerItem }} {{ currency }} per day</span>
+    </div>
+
+      <br><br><a href="{% url 'RentalApp:item_list' %}" class="btn btn-secondary ml-2">Back</a>
+
+      <a href="{% url 'RentalApp:checkout_page' %}" class="btn btn-warning ml-2">Rent</a>
+
+      <a href='#' onclick='overlay()' class="btn btn-primary ml-2">Contact Owner</a>
+  </div>
+ </div>
+ <div id="overlay">
+    <h5 class="text-center pt-5">Contact Owner</h5>
+    <div class="row justify-content-center">
+                <form action="{% url 'RentalApp:send_email' item.pk%}" method="post">{% csrf_token %}
+                    <input type="text" name="username" value="Name"/><br>
+                    <input type="email" name="email" value="email"/><br>
+                    <textarea name="message" rows="4" cols="50">Message</textarea><br>
+                    {% if item.itemOwner.phone_number %}
+                        <input type="checkbox" name="sendSMS" value="sendSMS">
+                        <label for="sendSMS">Send a text message</label>
+                    {% endif %}
+                    <br><button class="btn btn-success ml-2" type="submit">Send</button>
+                    <a href='#' onclick='overlay()'>close</a>
+                </form>
+    </div>
+ </div>
+
+{% if item.asin is not None %}
+<br>
+<div>
+     <div>
+         <h2>Amazon Lookup</h2>
+        <table class="table table-striped table-bordered table-hover">
+             <thead>
+                 <tr class ="bg-info">
+                     <th>Price ({{ currency }})</th>
+                     <th>Product Name</th>
+                     <th>Rating</th>
+                     <th>Reviews</th>
+                     <th>Is Prime</th>
+                 </tr>
+             </thead>
+             <tbody>
+                <tr>
+                    <td>{{ amazondetails.amzprice }}</td>
+                    <td>{{ amazondetails.amzname }}</td>
+                    <td>{{ amazondetails.amzreviewrating }}</td>
+                    <td>{{ amazondetails.amzreviewcount }}</td>
+                    <td>{{ amazondetails.amzprime }}</td>
+                </tr>
+             </tbody>
+         </table>
+     </div>
+ </div>
+{% endif %}
+<script>
+function overlay() {
+	el = document.getElementById("overlay");
+	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+}
+</script>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Account Details{% endblock title %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h2 class="text-center pt-5">Edit Account Details</h2>
+        <div class="form-group row justify-content-center">
+            <form method="post">
+              {% csrf_token %}
+              {{ form|crispy }}
+                <br>
+              <button class="btn btn-success" type="submit">Submit</button>
+                <a href="{% url 'RentalApp:item_list' %}" class="btn btn-secondary ml-2">
+                Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  {{ product.name }}
+{% endblock %}
+{% block content %}
+<div class="container1">
+
+  <!-- Left Column / Headphones Image -->
+  <div class="left-column">
+    <img src="{% if item.itemImage %}{{ item.itemImage.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}" alt="">
+  </div>
+
+
+  <!-- Right Column -->
+  <div class="right-column">
+
+    <!-- Product Description -->
+    <div class="product-description">
+      <span>{{ item.category }}</span>
+      <h1>{{ item.itemName }}</h1>
+      <p>{{ item.itemDescription|linebreaks }}</p>
+      <input type="checkbox" name="itemAvaialable" value="itemAvaialable" {% if item.itemAvaialable %} checked {% endif %} disabled>
+      <label for="itemAvaialable">Product Available</label>
+      <p>Added on: {{item.itemAddedDate}}</p>
+
+    </div>
+    <div class="product-description">
+      <p>{{item.itemDescription}}</p>
+    </div>
+
+    <!-- Product Pricing -->
+    <div class="product-price">
+      <span>${{ item.costPerItem }}</span>
+    </div>
+  </div>
+  <div style="margin-top: 100px">
+         <p><a href="{% url 'RentalApp:edit_product' item.pk%}" role="button"  class="btn btn-info btn-size">Edit Product</a></p>
+  <p><a href="{% url 'RentalApp:delete_product' item.pk%}" role="button" class="btn btn-danger btn-size">Delete Product</a></p>
+    <p><a href="{% url 'RentalApp:my_products' %}" class="btn btn-secondary btn-size">
+                    Back </a></p>
+ </div>
+
+  <div id="delete">
+
+  </div>
+</div>
+{% endblock %}

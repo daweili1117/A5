@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="jumbotron">
+    <h3 class="text-center pt-5">Address</h3>
+    <div class="form-group row justify-content-center">
+<div>
+   <address> {{object.address1}}
+       {% if not object.address2 is None %}
+{{object.address2}} {%endif%}<br>
+    {{object.city}}, {{object.state}}-{{object.zip_code}}<br>
+{{object.country}}<br>
+   </address>
+    <p>{% if address is None %}<a href="{% url 'RentalApp:add_address' %}" role="button" class="btn btn-info">Add Address</a>
+        {% else %}<a href="{% url 'RentalApp:edit_address' object.pk%}" role="button" class="btn btn-info">Edit Address</a>{% endif %}</p>
+
+    </div>
+    </div>
+</div>
+
+
+{% endblock content%}

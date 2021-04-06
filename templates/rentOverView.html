@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div id="login">
+    <h5 class="text-center pt-5">Rent Overview</h5>
+    <div id="login-row" class="row justify-content-center align-items-center">
+        <div id="login-column" class="col-md-6">
+            <div id="login-box" class="col-md-12">
+                <div class="card card-body" style="text-align: center;">
+
+                    <span>Product name: {{object.item.itemName}}</span><br>
+                    <span>Rent Start Date: {{object.rentStartDate}}</span><br>
+                    <span>Rent End Date: {{object.rentEndDate}}</span><br>
+                    <span>Renter Name: {{object.renterName}}</span><br>
+                    <span>Renter Phone Number: {{object.renterPhoneNumber}}</span><br>
+                    <span>Total Rent: {{object.totalCost}}</span><br>
+                <a href="{% url 'RentalApp:rental_history' %}" class="btn btn-secondary ml-2">
+                    Back</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+   </div>
+<script>
+
+</script>
+{% endblock content %}

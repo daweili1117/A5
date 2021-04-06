@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Work Orders{% endblock title %}
+
+{% block content %}
+     <div class="float-right">
+         <a href="{% url 'RentalApp:export_csv'%}" role="button" class="btn btn-secondary">Export-csv</a>
+    <a href="{% url 'RentalApp:export_pdf'%}" role="button"  class="btn btn-primary">Export-pdf</a>
+    <a href="{% url 'RentalApp:rent'%}" role="button"  class="btn btn-info">Initiate rental process</a>
+     </div>
+<h2>Rented History</h2>
+    <div>
+            <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Rented Item name</th>
+                    <th scope="col">Rent start date</th>
+                    <th scope="col">Rent End date</th>
+                    <th scope="col">Rented to</th>
+                    <th scope="col">Renter Phone number</th>
+                    <th scope="col">Total Rent</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rentHist in rent_items %}
+                <tr>
+                    <td>{{rentHist.item.itemName}}</td>
+                    <td>{{rentHist.rentStartDate}}</td>
+                    <td>{{rentHist.rentEndDate}}</td>
+                    <td>{{rentHist.renterName}}</td>
+                    <td>{{rentHist.renterPhoneNumber}}</td>
+                    <td>{{rentHist.totalCost}}</td>
+                    <td><a href="{% url 'RentalApp:end_rent' rentHist.rentId%}" role="button"  class="btn btn-info">End rent</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+       {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+      <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="../static/css/base.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+   <!-- <name>{% block name %}CMS App{% endblock name %}</name> -->
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-info md-4">
+        <a href="{% url 'RentalApp:item_list' %}" class="navbar-brand">
+            <!--<a href="#" class="navbar-brand">-->
+          <!-- Logo Image -->
+            <img src="{% static 'images/logo.png' %}" height="60" width="80" alt="Rental System" class="d-inline-block align-middle mr-2">
+          <!-- Logo Text
+            <span class="text-uppercase font-weight-bold pad">Rental System</span> -->Rental System
+        </a>
+     <button class="navbar-toggler bg-info" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+      </button>
+           <div class="collapse navbar-collapse bg-info" id="navbarNav">
+              {% if user.is_authenticated %}
+            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+              <li class="nav-item active" style="text-align: right">
+                <h4><a class="nav-link" href="{% url 'RentalApp:item_list' %}">Home  <span class="sr-only">(current)</span></a></h4>
+              </li>
+              <li class="nav-item" style="text-align: right">
+                <h4><a class="nav-link" href="{% if request.session.addressId is None%} {%url 'RentalApp:add_address'%} {%else%} {%url 'RentalApp:address' request.session.addressId%} {%endif%}"> Address  </a></h4>
+              </li>
+              <li class="nav-item active" style="text-align: right">
+                <h4><a class="nav-link" href="{% url 'RentalApp:my_products' %}">My Products <span class="sr-only">(current)</span></a></h4>
+              </li>
+                <li class="nav-item active" style="text-align: right">
+                <h4><a class="nav-link" href="{% url 'RentalApp:rental_history' %}">Rentals <span class="sr-only">(current)</span></a></h4>
+              </li>
+              <li class="nav-item active" style="text-align: right">
+                  <h4><a class="nav-link dropdown-toggle" href="#" id="userMenu"\
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded\
+                                 ="false"><i class="fa fa-user icon"></i>
+                    {{ user.username }}
+                  </a>
+
+                  <div class="dropdown-menu dropdown-menu-right bg-info"
+                  aria-labelledby="userMenu">
+                      <a class="dropdown-item nav-link" href="{% url 'RentalApp:accountDetails' user.pk %}">Account details</a>
+                      <div class="dropdown-divider"></div>
+                  <a class="dropdown-item nav-link" href="{% url 'RentalApp:changePassword' %}">Change password</a>
+                   <div class="dropdown-divider"></div>
+                    <a class="dropdown-item nav-link" href="{% url 'logout' %}">
+                    Log Out</a>
+                  </div></li>
+              </ul>
+            </div>
+        {% else %}
+          <form class="form-inline ml-auto">
+            <a href="{% url 'login' %}" class="btn btn-secondary ml-2">
+            Log In</a>
+              <a href="{% url 'RentalApp:signup' %}" class="btn btn-primary ml-2">
+            Sign up</a>
+
+          </form>
+        {% endif %}
+
+      </div>
+    </nav>
+
+    <div class="content">
+      {% block content %}
+      {% endblock content %}
+
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"\ integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+      $(document).ready(function(){
+        {% block domready %}
+        {% endblock %}
+      });
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Sign Up{% endblock title %}
+
+{% block content %}
+ <div id="login">
+    <h3 class="text-center pt-5">Sign up</h3>
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form method="post" id="login-form" class="form">
+                          {% csrf_token %}
+                          {{ form|crispy }}
+                          <button class="btn btn-success" type="submit">Sign Up</button>
+                            <a href="{% url 'RentalApp:item_list' %}" class="btn btn-secondary ml-2">
+                                    Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+</div>
+{% endblock content %}

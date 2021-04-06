@@ -1,0 +1,10 @@
+django==2.2.10
+django-crispy-forms
+Pillow==6.2.1
+reportlab
+django-filter
+requests
+twilio==6.32.0
+wheel
+django-allauth
+psycopg2
