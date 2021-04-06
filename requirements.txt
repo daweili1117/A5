@@ -11,3 +11,6 @@ psycopg2
 gunicorn
 django-heroku
 braintree
+cloudinary
+django-cloudinary-storage
+dj3-cloudinary-storage

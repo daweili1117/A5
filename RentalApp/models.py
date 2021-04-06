@@ -252,6 +252,7 @@ class Item(models.Model):
     itemOwner = models.ForeignKey(Customer,
                                   on_delete=models.CASCADE,
                                   related_name='my_items'
+
                                   )
     itemAvaialable = models.BooleanField()
     costPerItem = models.IntegerField(verbose_name='Cost per Item (USD)')

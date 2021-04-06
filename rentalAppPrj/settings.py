@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -37,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'RentalApp',
     'crispy_forms',
@@ -46,7 +51,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'django.contrib.sites',
-    'django.contrib.postgres'
+    'django.contrib.postgres',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -151,6 +157,15 @@ LOGIN_URL = '/user/login/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 AUTH_USER_MODEL = 'RentalApp.Customer'
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'hthvewt3t',
+    'API_KEY': '431642785297452',
+    'API_SECRET': '-I4LksQ0T9-O7RGtFK8stLWhtXk',
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
