@@ -13,7 +13,7 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.conf import settings
 
-from .forms import CustomUserCreationForm, ItemCreationForm
+from .forms import CustomUserCreationForm
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
@@ -31,19 +31,6 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 import braintree
 
 from django.contrib.auth.decorators import login_required
-
-
-from django import forms
-from django.http import HttpResponse
-
-from cloudinary.models import CloudinaryField
-
-from cloudinary.forms import cl_init_js_callbacks
-
-
-
-
-
 
 
 @login_required
@@ -242,16 +229,6 @@ class AddProductView(LoginRequiredMixin, CreateView):
               'costPerItem',
               'itemDescription')
     login_url = '/users/login/'
-
-    def upload(request):
-        context = dict(backend_form=ItemCreationForm())
-
-        if request.method == 'POST':
-            form = ItemCreationForm(request.POST, request.FILES)
-            context['posted'] = form.instance
-            if form.is_valid():
-                form.save()
-
 
     def form_valid(self, form):
         form.is_valid()
