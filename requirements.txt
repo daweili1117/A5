@@ -10,3 +10,4 @@ django-allauth
 psycopg2
 gunicorn
 django-heroku
+braintree
