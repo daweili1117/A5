@@ -8,3 +8,5 @@ twilio==6.32.0
 wheel
 django-allauth
 psycopg2
+gunicorn
+django-heroku
