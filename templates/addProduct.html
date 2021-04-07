@@ -14,7 +14,7 @@
 
 
                     <div id='backend_upload'>
-    <form action="{% url "photo_album.views.upload" %}" method="post"
+    <form action="" method="post"
           enctype="multipart/form-data">
       {% csrf_token %}
       {{ backend_form }}
