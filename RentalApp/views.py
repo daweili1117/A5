@@ -227,7 +227,9 @@ class AddProductView(LoginRequiredMixin, CreateView):
               'itemImage',
               'itemAvaialable',
               'costPerItem',
-              'itemDescription')
+              'itemDescription',
+              'asin'
+              )
     login_url = '/users/login/'
 
     def form_valid(self, form):
@@ -248,7 +250,8 @@ class EditProductView(LoginRequiredMixin, UpdateView):
               'itemImage',
               'itemAvaialable',
               'costPerItem',
-              'itemDescription')
+              'itemDescription',
+              'asin')
 
     def form_valid(self, form):
         form.is_valid()
