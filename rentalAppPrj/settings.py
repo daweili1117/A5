@@ -179,8 +179,8 @@ AUTH_USER_MODEL = 'RentalApp.Customer'
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'hthvewt3t',
-    'API_KEY': '431642785297452',
-    'API_SECRET': '-I4LksQ0T9-O7RGtFK8stLWhtXk',
+    'API_KEY': os.environ.get('CLOUDINARY_STORAGE_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_STORAGE_API_SECRET'),
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
