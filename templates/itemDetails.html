@@ -21,7 +21,7 @@
       <span>{{ item.category }}</span>
       <h1>{{ item.itemName }}</h1>
       <p>{{ item.itemDescription|linebreaks }}</p>
-         <p>{{item.itemOwner}} {% if not item.itemOwner.phone_number is None%} {{item.itemOwner.phone_number}}</p> {%endif%}
+         <p>{{item.itemOwner}}</p> {%endif%}
         {%if not item.itemOwner.address %}
         <p>No address</p>
         {%else%}
