@@ -397,6 +397,7 @@ def sendMail(request, pk):
     message = request.POST['message']
     ctx = {
         'itemId' : item.pk,
+        'ownername' : item.itemOwner.username,
         'renter': renter,
         'email': email,
         'message': message
@@ -415,7 +416,7 @@ def sendMail(request, pk):
             auth_token = settings.TWILIO_AUTH_TOKEN
             client = Client(account_sid, auth_token)
             message = client.messages.create(
-                body="Hi, " + renter + " is intrested in your product "+item.itemName+". Conact information of "+renter+" is: "+email,
+                body="Hi, " + renter + " is intrested in your product "+item.itemName+". He sent a message : "+message+" Conact "+renter+"  through "+email,
                 from_= settings.TWILIO_PHONE_NUMBER,
                 to= item.itemOwner.phone_number
             )
