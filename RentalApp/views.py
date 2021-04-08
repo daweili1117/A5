@@ -403,10 +403,10 @@ def sendMail(request, pk):
         'message': message
     }
     subject = renter+" is interested in your product "+item.itemName
-    message = render_to_string('conatctowner.html', ctx, request=request)
+    htmlmessage = render_to_string('conatctowner.html', ctx, request=request)
     emails = [item.itemOwner.email]
 
-    msg = EmailMessage(subject, message, settings.EMAIL_HOST_USER, emails)
+    msg = EmailMessage(subject, htmlmessage, settings.EMAIL_HOST_USER, emails)
     msg.content_subtype = "html"  # Main content is now text/html
     msg.send(fail_silently=False)
     if item.itemOwner.phone_number:
@@ -415,7 +415,7 @@ def sendMail(request, pk):
             account_sid = settings.TWILIO_ACCOUNT_SID
             auth_token = settings.TWILIO_AUTH_TOKEN
             client = Client(account_sid, auth_token)
-            message = client.messages.create(
+            smsmessage = client.messages.create(
                 body="Hi, " + renter + " is intrested in your product "+item.itemName+". He sent a message : "+message+" Conact "+renter+"  through "+email,
                 from_= settings.TWILIO_PHONE_NUMBER,
                 to= item.itemOwner.phone_number
