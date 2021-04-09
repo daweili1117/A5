@@ -1,7 +1,7 @@
 # ISQA 8380 Team 6 - Assignment 5
 
 ## Team Members
-* James Frnaco
+* James Franco
 * Dawei Li
 * Krishnaveni Balusupati
 * Wada Ruhi
