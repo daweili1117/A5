@@ -194,23 +194,26 @@ div.content {
   margin-top: 85px;
 }
 .container1 {
-  max-width: 1200px;
+  /*max-width: 1200px;*/
   margin: 0 auto;
-  padding: 15px;
   display: flex;
 }
 .left-column {
-  width: 65%;
+  width: 35%;
   position: relative;
 }
 
 .right-column {
   width: 35%;
   margin-top: 60px;
+    padding-top:50px;
+    padding-right: 100px;
+    float: right;
 }
 .left-column img {
     padding-top: 100px;
-  width: 50%;
+    padding-left: 50px;
+  width: 60%;
 
 }
 
@@ -298,4 +301,26 @@ div.content {
      background-color: #fff;
      border:1px solid #000;
      padding:15px;
+}
+
+#quotescontainer{
+    width: 100%;
+    font-size: 12px;
+    overflow: hidden; /* contain floated elements */
+    background: #ccc
+}
+#quotesleft {
+    float: left;
+    width: 33%;
+    /*background-color: #bbb;*/
+}
+#quotescenter {
+    float: left;
+    /*background-color: #eee;*/
+    width: 33%;
+}
+#quotesright{
+    float: left;
+    width: 33%;
+    /*background-color: #bbb;*/
 }

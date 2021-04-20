@@ -47,9 +47,11 @@
           <a href='#' onclick='overlay()' class="btn btn-primary ml-2">Contact Owner</a>
   </div>
   <div class="float-right" style="margin-top: 100px">
+      {% if item.itemOwner.address %}
          <a href="{{ gmapsLoc }}" target="_blank" rel="noopener noreferrer">
             <img src="{{ url }}" class="img-fluid" alt="Responsive image">
         </a>
+      {% endif %}
  </div>
 
 </div>
