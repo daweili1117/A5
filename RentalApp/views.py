@@ -101,6 +101,16 @@ def item_details(request, id):
     item = get_object_or_404(Item,
                              itemId=id)
 
+    has_address = False
+    address = ""
+    try:
+        has_address = (item.itemOwner.address is not None)
+    except Address.DoesNotExist:
+        pass
+    if has_address:
+        address = item.itemOwner.address.address1+","+item.itemOwner.address.address2+","+item.itemOwner.address.city+","+item.itemOwner.address.state+","+item.itemOwner.address.country+","+item.itemOwner.address.zip_code
+    url = "https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C"+address+"&key=AIzaSyAQ_iMR3Zr4lEFiDLVilL85wtr-MVUl6QE"
+    gmapsLoc = "http://maps.google.com/?q="+address
     if item.asin is not None:
         amazondetails = Item.getamazon(item)
     else:
@@ -121,7 +131,7 @@ def item_details(request, id):
 
     return render(request,
                   'itemDetails.html',
-                  {'item': item, 'amazondetails': amazondetails, 'currency': currency,})
+                  {'gmapsLoc': gmapsLoc, 'url': url, 'item': item, 'amazondetails': amazondetails, 'currency': currency,})
 
 
 @login_required(login_url='/users/login/')

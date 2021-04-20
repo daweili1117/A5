@@ -4,26 +4,26 @@
   {{ product.name }}
 {% endblock %}
 {% block content %}
- <div class="container1">
+
+
+<div class="container1">
 
   <!-- Left Column / Headphones Image -->
+  <div class="left-column">
+    <img src="{% if item.itemImage %}{{ item.itemImage.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}" class="img-fluid" alt="Responsive image">
+  </div>
 
 
   <!-- Right Column -->
-  <div class="left-column">
-    <img src="{% if item.itemImage %}{{ item.itemImage.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}" alt="">
-  </div>
-
   <div class="right-column">
 
     <!-- Product Description -->
     <div class="product-description">
       <span>{{ item.category }}</span>
       <h1>{{ item.itemName }}</h1>
-      <p>{{ item.itemDescription|linebreaks }}</p>
-         <p>{{item.itemOwner}}</p>
+      <p>{{item.itemOwner}}</p>
         {%if not item.itemOwner.address %}
-        <p>No address</p>
+            <p>No address</p>
         {%else%}
             <p><h5>Address </h5></p>
             <address> {{item.itemOwner.address.address1}} {{item.itemOwner.address.address2}} <br>
@@ -32,19 +32,29 @@
             </address>
         {%endif%}
     </div>
+    <div class="product-description">
+      <p>{{item.itemDescription}}</p>
+    </div>
 
     <!-- Product Pricing -->
     <div class="product-price">
-      <span>Rent: {{ item.costPerItem }} {{ currency }} per day</span>
+      <span>${{ item.costPerItem }}</span>
     </div>
+  <br><br><a href="{% url 'RentalApp:item_list' %}" class="btn btn-secondary ml-2">Back</a>
 
-      <br><br><a href="{% url 'RentalApp:item_list' %}" class="btn btn-secondary ml-2">Back</a>
+          <a href="#" class="btn btn-warning ml-2">Rent</a>
 
-      <a href="#" class="btn btn-warning ml-2">Rent</a>
-
-      <a href='#' onclick='overlay()' class="btn btn-primary ml-2">Contact Owner</a>
+          <a href='#' onclick='overlay()' class="btn btn-primary ml-2">Contact Owner</a>
   </div>
+  <div class="float-right" style="margin-top: 100px">
+         <a href="{{ gmapsLoc }}" target="_blank" rel="noopener noreferrer">
+            <img src="{{ url }}" class="img-fluid" alt="Responsive image">
+        </a>
  </div>
+
+</div>
+
+
  <div id="overlay">
     <h5 class="text-center pt-5">Contact Owner</h5>
     <div class="row justify-content-center">
