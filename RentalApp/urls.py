@@ -18,7 +18,11 @@ from .views import (
     export_csv,
     EditAccountInfoView,
     sendMail,
-    checkout_page
+    simpleCheckout,
+    # checkout,
+    # paymentComplete,
+
+
 )
 from django.contrib.auth import views as auth_views
 
@@ -51,8 +55,6 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('sendMail/<int:pk>/',sendMail,name="send_email"),
-
-    path('item/checkout/', checkout_page, name='checkout_page'),
 
 
     # url(r'^password_reset/$', auth_views.password_reset, name='password_reset'),

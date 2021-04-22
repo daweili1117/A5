@@ -40,11 +40,21 @@
     <div class="product-price">
       <span>${{ item.costPerItem }}</span>
     </div>
-  <br><br><a href="{% url 'RentalApp:item_list' %}" class="btn btn-secondary ml-2">Back</a>
+  <br><br>
 
-          <a href="#" class="btn btn-warning ml-2">Rent</a>
 
-          <a href='#' onclick='overlay()' class="btn btn-primary ml-2">Contact Owner</a>
+{#         <a href="{% url 'RentalApp:simple-checkout' %}" class="btn btn-warning ml-2">Rent</a>#}
+<div>
+    <a href='#' onclick='overlay()' class="btn btn-primary ml-2">Contact Owner</a>
+    <a href="{% url 'RentalApp:item_list' %}" class="btn btn-secondary ml-2">Back</a>
+</div>
+
+  <br/>
+
+  <div id="paypal-button-container"></div>
+
+    <!-- Include the PayPal JavaScript SDK -->
+
   </div>
   <div class="float-right" style="margin-top: 100px">
       {% if item.itemOwner.address %}
@@ -108,4 +118,38 @@ function overlay() {
 	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 }
 </script>
+
+
+<script src="https://www.paypal.com/sdk/js?client-id=ARIUuHzjx7XQkXRVUrZ0AZfYzIY_QNYFXoMZmuOm6nUm13kxqjxvgBk7m-GeGTclmIhizAmOxhlpBOXK&currency=USD&disable-funding=credit,card"></script>
+
+    <script>
+    var total = '{{ item.costPerItem }}'
+
+
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: total
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Show a success message to the buyer
+                    alert('Transaction completed by ' + details.payer.name.given_name + '!'+ '\r\n' + 'Thanks for your business!'+ '\r\n' +'Have a fun in your renting period!');
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+    </script>
+
 {% endblock %}

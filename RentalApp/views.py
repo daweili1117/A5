@@ -1,4 +1,5 @@
 import csv
+from typing import Dict
 
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -32,34 +33,35 @@ import braintree
 
 from django.contrib.auth.decorators import login_required
 
-
-@login_required
-def checkout_page(request):
-    # generate all other required data that you may need on the #checkout page and add them to context.
-
-    if settings.BRAINTREE_PRODUCTION:
-        braintree_env = braintree.Environment.Production
-    else:
-        braintree_env = braintree.Environment.Sandbox
-
-    # Configure Braintree
-    braintree.Configuration.configure(
-        braintree_env,
-        merchant_id=settings.BRAINTREE_MERCHANT_ID,
-        public_key=settings.BRAINTREE_PUBLIC_KEY,
-        private_key=settings.BRAINTREE_PRIVATE_KEY,
-    )
-
-    try:
-        braintree_client_token = braintree.ClientToken.generate({"customer_id": Customer.id})
-    except:
-        braintree_client_token = braintree.ClientToken.generate({})
-
-    context = {'braintree_client_token': braintree_client_token}
-    return render(request, 'checkout.html', context)
+from django.http import JsonResponse
+import json
 
 
 
+
+def simpleCheckout(request):
+	return render(request, 'simple_checkout.html')
+
+
+# def checkout(request, pk):
+#     item = get_object_or_404(id=pk)
+#
+#     return render(request,
+#                   'checkout.html',
+#                   {'item': item })
+#
+#
+
+
+# def paymentComplete(request):
+# 	body = json.loads(request.body)
+# 	print('BODY:', body)
+# 	product = Product.objects.get(id=body['productId'])
+# 	Order.objects.create(
+# 		product=product
+# 		)
+#
+# 	return JsonResponse('Payment completed!', safe=False)
 
 
 def item_list(request):
