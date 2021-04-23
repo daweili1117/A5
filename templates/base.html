@@ -52,11 +52,11 @@
 
                   <div class="dropdown-menu dropdown-menu-right bg-info"
                   aria-labelledby="userMenu">
-                      <a class="dropdown-item nav-link" href="{% url 'RentalApp:accountDetails' user.pk %}">Account details</a>
+                      <a class="btn btn-info w-100" href="{% url 'RentalApp:accountDetails' user.pk %}">Account details</a>
                       <div class="dropdown-divider"></div>
-                  <a class="dropdown-item nav-link" href="{% url 'RentalApp:changePassword' %}">Change password</a>
+                  <a class="btn btn-info w-100" href="{% url 'RentalApp:changePassword' %}">Change password</a>
                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item nav-link" href="{% url 'logout' %}">
+                    <a class="btn btn-info w-100" href="{% url 'logout' %}">
                     Log Out</a>
                   </div></li>
               </ul>
