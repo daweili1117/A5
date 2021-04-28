@@ -111,7 +111,7 @@ def item_details(request, id):
         pass
     if has_address:
         address = item.itemOwner.address.address1+","+item.itemOwner.address.address2+","+item.itemOwner.address.city+","+item.itemOwner.address.state+","+item.itemOwner.address.country+","+item.itemOwner.address.zip_code
-    url = "https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C"+address+"&key=AIzaSyAQ_iMR3Zr4lEFiDLVilL85wtr-MVUl6QE"
+    url = "https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap\&markers=size:mid%7Ccolor:red%7C"+address+"&key="+settings.GOOGLE_KEY
     gmapsLoc = "http://maps.google.com/?q="+address
     if item.asin is not None:
         amazondetails = Item.getamazon(item)
