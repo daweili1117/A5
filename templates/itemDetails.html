@@ -38,6 +38,8 @@
 
     <!-- Product Pricing -->
     <div class="product-price">
+
+
       <span>${{ item.costPerItem }}</span>
     </div>
   <br><br>
@@ -50,6 +52,10 @@
 </div>
 
   <br/>
+     <label>Please contact Owner before pay the rent !!!</label>
+
+        <input type="number" size="70" placeholder="Rent it for ... day/days" id="number" >
+        <button type="button" onclick="getInputValue();">Confirm</button>
 
   <div id="paypal-button-container"></div>
 
@@ -120,11 +126,29 @@ function overlay() {
 }
 </script>
 
+<script>
+    function getInputValue(){
+            // Selecting the input element and get its value
+            var days = document.getElementById("number").value;
+            var price ='{{ item.costPerItem }}'
+        total = days * price
+        console.log(total)
+
+            // Displaying the value
+            alert("Please contact Owenr before click Paypal to pay rent !!!"+ '\r\n' +
+                'Confirmed ! Rent it for ' + days + 'day/days !'+ '\r\n' +
+                'Your total will be ' + total+ '\r\n' +
+                'Thanks for rent with KIRAY ! '
+            );
+        }
+
+</script>
+
 
 <script src="https://www.paypal.com/sdk/js?client-id=ARjGT5fxQaWQq6dzlLa4-6BY9WxNVOsFkG9_hYPROnkynRbWft1STpBJgBGHnvy-DhJY0mjdCIQzE4kr&currency=USD&disable-funding=credit,card"></script>
 
-    <script>
-    var total = '{{ item.costPerItem }}'
+<script>
+
 
 
         // Render the PayPal button into #paypal-button-container
@@ -136,6 +160,7 @@ function overlay() {
                     purchase_units: [{
                         amount: {
                             value: total
+
                         }
                     }]
                 });
@@ -151,6 +176,6 @@ function overlay() {
 
 
         }).render('#paypal-button-container');
-    </script>
+</script>
 
 {% endblock %}
