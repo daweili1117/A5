@@ -4,7 +4,7 @@
 {% block content %}
 <h1>My Products</h1>
  <div class="float-right">
-         <p style="padding-right: 100px"><a href="{% url 'RentalApp:add_product' %}" role="button" class="btn btn-info" id="addBtn">Add Product</a></p>
+         <p><a href="{% url 'RentalApp:add_product' %}" role="button" class="btn btn-info" id="addBtn">Add Product</a></p>
  </div>
 <div id="home-row" class="row">
     {%if items is Null%}

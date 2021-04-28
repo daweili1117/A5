@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div id="login">
+<div class="jumbotron">
     <h5 class="text-center pt-5">End Rent</h5>
-    <div id="login-row" class="row justify-content-center align-items-center">
-        <div id="login-column" class="col-md-6">
-            <div id="login-box" class="col-md-12">
+    <div class="form-group row justify-content-center">
                 <form action="" method="post">{% csrf_token %}
                     {{ form|crispy }}
                     <div id="costDiv" style="display:none;"><p>Total Rent amount: {{object.totalCost}}</p></div>
@@ -13,10 +11,8 @@
                     <a href="{% url 'RentalApp:rental_history' %}" class="btn btn-secondary ml-2">
                     Cancel</a>
                 </form>
-            </div>
-        </div>
     </div>
-   </div>
+</div>
 <script>
 function show() {
 document.getElementById('endbtn').style.display = none;
