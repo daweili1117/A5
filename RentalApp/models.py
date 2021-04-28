@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
 import requests
 
@@ -171,7 +172,7 @@ class Customer(AbstractUser):
     def price_offset(self):
         url = "https://api.fastforex.io/fetch-one"
 
-        querystring = {"to": self.view_currency, "api_key": "68f5687c8e-31e1891ac4-qpki7m"}
+        querystring = {"to": self.view_currency, "api_key": settings.CURRENCY_AUTH_TOKEN}
 
         headers = {"Accept": "application/json"}
 
@@ -274,7 +275,7 @@ class Item(models.Model):
         url = "https://amazon-live-data.p.rapidapi.com/getasin/us/" + str(self.asin)
 
         headers = {
-            'x-rapidapi-key': "a58f03259cmsh602a38523c2fa13p16957ajsnb0b62b23c79f",
+            'x-rapidapi-key': settings.AMZ_AUTH_TOKEN,
             'x-rapidapi-host': "amazon-live-data.p.rapidapi.com"
         }
 
