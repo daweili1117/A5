@@ -4,7 +4,7 @@
 * James Franco
 * Dawei Li
 * Krishnaveni Balusupati
-* Wada Ruhi
+* Warda Ruhi
 * Matthew Macrander
 
 Note that this is v2 of our repo after a file migration, which may impact listed contributions.
